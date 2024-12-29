@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto Redata - Redação ENEM</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto; /* Permite rolagem apenas na vertical */
+    overflow-x: hidden; /* Impede rolagem na horizontal */
+}
+
+.container {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 10px auto; /* Adiciona margem para que o container fique centralizado horizontalmente */
+    max-width: 800px ; /* Define um limite para a largura */
+    width: 90%; /* Ajusta largura para dispositivos menores */
+    box-sizing: border-box; /* Garante que o padding não aumente a largura total */
+}
+
+        h1 {
+            color: #0056b3;
+            text-align: center;
+        }
+
+        h2 {
+            color: #444;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f0f0f0;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: #0056b3;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #004494;
+            
+            
+            
+       #radarChart {
+    width: 10cm;
+    height: 10cm;
+    display: block;
+    margin: 0 auto;
+    box-sizing: content-box; /* Garante que apenas o conteúdo seja medido */
+        }
+            
+        
+    </style>
+</head>
+<body>
+    <div class="container" id="formContainer">
+        <h1>PROJETO REDATA - Redação ENEM</h1>
+        <h2>Edumetrics - contato: pedro@sejagoon.com</h2>
+        <br><br>
+        <form id="form1">
+            <table>
+                <tr>
+                    <td><label for="professor">Nome do(a) Professor(a) *</label></td>
+                    <td><input type="text" id="professor" name="professor"></td>
+                </tr>
+                <tr>
+                    <td><label for="estudante">Nome do Estudante *</label></td>
+                    <td><input type="text" id="estudante" name="estudante"></td>
+                </tr>
+                <tr>
+                    <td><label for="turma">Turma/Curso *</label></td>
+                    <td><input type="text" id="turma" name="turma"></td>
+                </tr>
+            </table>
+            <br><br>
+            <table>
+                <tr>
+                    <td><label for="linhas">Número de Linhas</label></td>
+                    <td><input type="number" id="linhas" name="linhas"></td>
+                </tr>
+                <tr>
+                    <td><label for="competencia1">Competência 1</label></td>
+                    <td>
+                        <select id="competencia1" name="competencia1">
+                            <option value="0">0</option>
+                            <option value="40">40</option>
+                            <option value="80">80</option>
+                            <option value="120">120</option>
+                            <option value="160">160</option>
+                            <option value="200">200</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="competencia2">Competência 2</label></td>
+                    <td>
+                        <select id="competencia2" name="competencia2">
+                            <option value="0">0</option>
+                            <option value="40">40</option>
+                            <option value="80">80</option>
+                            <option value="120">120</option>
+                            <option value="160">160</option>
+                            <option value="200">200</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="competencia3">Competência 3</label></td>
+                    <td>
+                        <select id="competencia3" name="competencia3">
+                            <option value="0">0</option>
+                            <option value="40">40</option>
+                            <option value="80">80</option>
+                            <option value="120">120</option>
+                            <option value="160">160</option>
+                            <option value="200">200</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="competencia4">Competência 4</label></td>
+                    <td>
+                        <select id="competencia4" name="competencia4">
+                            <option value="0">0</option>
+                            <option value="40">40</option>
+                            <option value="80">80</option>
+                            <option value="120">120</option>
+                            <option value="160">160</option>
+                            <option value="200">200</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="competencia5">Competência 5</label></td>
+                    <td>
+                        <select id="competencia5" name="competencia5">
+                            <option value="0">0</option>
+                            <option value="40">40</option>
+                            <option value="80">80</option>
+                            <option value="120">120</option>
+                            <option value="160">160</option>
+                            <option value="200">200</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="anulacao">Anulação?</label></td>
+                    <td>
+                        <select id="anulacao" name="anulacao">
+                            <option value="">Selecione</option>
+                            <option value="Fuga ao tema">Fuga ao tema</option>
+                            <option value="Outro gênero">Outro gênero</option>
+                            <option value="Extensão insuficiente">Extensão insuficiente</option>
+                            <option value="Cópia de coletânea">Cópia de coletânea</option>
+                            <option value="Desenhos ou anulação proposital">Desenhos ou anulação proposital</option>
+                            <option value="Sinais gráficos sem função">Sinais gráficos sem função</option>
+                            <option value="Parte desconectada">Parte desconectada</option>
+                            <option value="Termos ofensivos">Termos ofensivos</option>
+                            <option value="Identificação inadequada">Identificação inadequada</option>
+                            <option value="Língua estrangeira">Língua estrangeira</option>
+                            <option value="Folha em branco">Folha em branco</option>
+                            <option value="Texto ilegível">Texto ilegível</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <br><br>
+            <button type="button" onclick="gerarRelatorio()">Gerar Relatório</button>
+        </form>
+    </div>
+
+    <div class="container" id="relatorioContainer" style="display: none;">
+        <h1>PROJETO REDATA - Redação ENEM</h1>
+        <br><br>
+        <table>
+            <tr>
+                <td><label for="professorRelatorio">Professor(a)</label></td>
+                <td><span id="professorRelatorio"></span></td>
+            </tr>
+            <tr>
+                <td><label for="estudanteRelatorio">Estudante</label></td>
+                <td><span id="estudanteRelatorio"></span></td>
+            </tr>
+            <tr>
+                <td><label for="turmaRelatorio">Turma/Curso</label></td>
+                <td><span id="turmaRelatorio"></span></td>
+            </tr>
+        </table>
+        <br><br>
+        
+        <table id="resultados">
+    <tr>
+        <th>Nota total</th>
+        <th>Qt. linhas</th>
+        <th>Gráfico de radar</th>
+    </tr>
+    <tr>
+        <td id="notaTotal"></td>
+        <td id="qtLinhas"></td>
+        <td>
+            <!-- Define o tamanho do canvas diretamente -->
+            <canvas id="radarChart" width="320" height="320"></canvas>
+        </td>
+    </tr>
+</table>
+
+
+        <br><br>
+        <table id="competencia1Table">
+            <tr>
+                <th colspan="4">Competência 1</th>
+            </tr>
+            <tr>
+                <td>Nota</td>
+                <td>Comentário</td>
+                <td>Sugestão</td>
+            </tr>
+            <tr>
+                <td id="c1Nota"></td>
+                <td id="c1Comentario"></td>
+                <td id="c1Sugestao"></td>
+            </tr>
+        </table>
+        <br>
+        <table id="competencia2Table">
+            <tr>
+                <th colspan="4">Competência 2</th>
+            </tr>
+            <tr>
+                <td>Nota</td>
+                <td>Comentário</td>
+                <td>Sugestão</td>
+            </tr>
+            <tr>
+                <td id="c2Nota"></td>
+                <td id="c2Comentario"></td>
+                <td id="c2Sugestao"></td>
+            </tr>
+        </table>
+        <br>
+        <table id="competencia3Table">
+            <tr>
+                <th colspan="4">Competência 3</th>
+            </tr>
+            <tr>
+                <td>Nota</td>
+                <td>Comentário</td>
+                <td>Sugestão</td>
+            </tr>
+            <tr>
+                <td id="c3Nota"></td>
+                <td id="c3Comentario"></td>
+                <td id="c3Sugestao"></td>
+            </tr>
+        </table>
+        <br>
+        <table id="competencia4Table">
+            <tr>
+                <th colspan="4">Competência 4</th>
+            </tr>
+            <tr>
+                <td>Nota</td>
+                <td>Comentário</td>
+                <td>Sugestão</td>
+            </tr>
+            <tr>
+                <td id="c4Nota"></td>
+                <td id="c4Comentario"></td>
+                <td id="c4Sugestao"></td>
+            </tr>
+        </table>
+        <br>
+        <table id="competencia5Table">
+            <tr>
+                <th colspan="4">Competência 5</th>
+            </tr>
+            <tr>
+                <td>Nota</td>
+                <td>Comentário</td>
+                <td>Sugestão</td>
+            </tr>
+            <tr>
+                <td id="c5Nota"></td>
+                <td id="c5Comentario"></td>
+                <td id="c5Sugestao"></td>
+            </tr>
+        </table>
+        <br><br>
+        <table id="anulacaoTable" style="display: none;">
+            <tr>
+                <th colspan="4">Anulação</th>
+            </tr>
+            <tr>
+                <td>Motivo</td>
+                <td>Comentário</td>
+                <td>Sugestão</td>
+            </tr>
+            <tr>
+                <td id="anulacaoMotivo"></td>
+                <td id="anulacaoComentario"></td>
+                <td id="anulacaoSugestao"></td>
+            </tr>
+        </table>
+        <br><br>
+        <h2>Edumetrics - contato: pedro@sejagoon.com</h2>
+        <br>
+        <button type="button" onclick="location.reload()">Gerar novo relatório</button>
+        <button type="button" onclick="window.print()">Imprimir</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        function gerarRelatorio() {
+            const form = document.getElementById('form1');
+            const professor = form.professor.value.trim();
+            const estudante = form.estudante.value.trim();
+            const turma = form.turma.value.trim();
+            const linhas = form.linhas.value.trim();
+            const competencia1 = parseInt(form.competencia1.value);
+            const competencia2 = parseInt(form.competencia2.value);
+            const competencia3 = parseInt(form.competencia3.value);
+            const competencia4 = parseInt(form.competencia4.value);
+            const competencia5 = parseInt(form.competencia5.value);
+            const anulacao = form.anulacao.value.trim();
+
+            if (!professor || !estudante || !turma) {
+                alert('Por favor, preencha todos os campos obrigatórios.');
+                document.querySelectorAll('input[type="text"]').forEach(input => {
+                    if (!input.value.trim()) {
+                        input.style.borderColor = 'red';
+                    }
+                });
+                return;
+            }
+
+            const notaTotal = competencia1 + competencia2 + competencia3 + competencia4 + competencia5;
+            const qtLinhas = linhas || '-';
+
+            localStorage.setItem('professor', professor);
+            localStorage.setItem('estudante', estudante);
+            localStorage.setItem('turma', turma);
+            localStorage.setItem('notaTotal', notaTotal);
+            localStorage.setItem('qtLinhas', qtLinhas);
+            localStorage.setItem('competencia1', competencia1);
+            localStorage.setItem('competencia2', competencia2);
+            localStorage.setItem('competencia3', competencia3);
+            localStorage.setItem('competencia4', competencia4);
+            localStorage.setItem('competencia5', competencia5);
+            localStorage.setItem('anulacao', anulacao);
+
+            document.getElementById('formContainer').style.display = 'none';
+            document.getElementById('relatorioContainer').style.display = 'block';
+
+            exibirRelatorio();
+        }
+
+        function exibirRelatorio() {
+            const professor = localStorage.getItem('professor');
+            const estudante = localStorage.getItem('estudante');
+            const turma = localStorage.getItem('turma');
+            const notaTotal = parseInt(localStorage.getItem('notaTotal'));
+            const qtLinhas = localStorage.getItem('qtLinhas');
+            const competencia1 = parseInt(localStorage.getItem('competencia1'));
+            const competencia2 = parseInt(localStorage.getItem('competencia2'));
+            const competencia3 = parseInt(localStorage.getItem('competencia3'));
+            const competencia4 = parseInt(localStorage.getItem('competencia4'));
+            const competencia5 = parseInt(localStorage.getItem('competencia5'));
+            const anulacao = localStorage.getItem('anulacao');
+
+            document.getElementById('professorRelatorio').innerText = professor;
+            document.getElementById('estudanteRelatorio').innerText = estudante;
+            document.getElementById('turmaRelatorio').innerText = turma;
+            document.getElementById('notaTotal').innerText = anulacao ? '0' : notaTotal;
+            document.getElementById('qtLinhas').innerText = qtLinhas;
+
+            const matriz = {
+                C1: {
+                    0: { comentario: 'O texto demonstra pouco conhecimento sobre como escrever de forma formal em português. Está tudo bem, podemos melhorar isso juntos!', prescricao: 'Estude as regras gramaticais básicas e práticas de escrita formal. Pratique a escrita de textos formais com foco na correção de erros comuns.' },
+                    40: { comentario: 'O texto demonstra bastante dificuldade em escrever de forma formal, cometendo muitos erros gramaticais e de estilo. Com prática e paciência, você vai melhorar.', prescricao: 'Foque em corrigir os erros gramaticais mais frequentes. Utilize ferramentas de correção e revise textos escritos para identificar e corrigir falhas repetitivas.' },
+                    80: { comentario: 'O texto ainda demonstra muitos erros ao escrever formalmente, tanto na gramática quanto na escolha de palavras. Não desanime, cada passo é um avanço!', prescricao: 'Revise e pratique a gramática formal, com ênfase nas áreas com maior incidência de erros. Leia e escreva textos formais regularmente para melhorar a escolha de registro.' },
+                    120: { comentario: 'O texto demonstra uma escrita razoável, mas ainda comete alguns erros de gramática e estilo. Continue praticando, você está no caminho certo!', prescricao: 'Aprimore o conhecimento das convenções da escrita e a construção sintática. Faça exercícios de revisão focados em corrigir os desvios gramaticais identificados.' },
+                    160: { comentario: 'O texto demonstra uma boa escrita formal, com poucos erros gramaticais e de estilo. Parabéns pelo progresso, continue assim!', prescricao: 'Mantenha a prática regular de escrita formal e revise textos para identificar possíveis desvios. Busque feedback e faça ajustes conforme necessário.' },
+                    200: { comentario: 'O texto demonstra uma excelente escrita formal e quase não comete erros. Parabéns, continue mantendo essas boas práticas!', prescricao: 'Continue utilizando boas práticas de escrita formal. Mantenha a revisão regular dos textos para garantir a correção e a precisão gramatical.' }
+                },
+                C2: {
+                    0: { comentario: 'O texto foge totalmente do tema ou não segue a estrutura correta. Infelizmente, isso faz com que ele receba nota zero.', prescricao: 'Leia atentamente a proposta e os textos motivadores para compreender bem o tema. Pratique a estrutura dissertativo-argumentativa.' },
+                    40: { comentario: 'O texto menciona o assunto, mas não aborda o tema corretamente, ou mistura tipos de texto. Vamos tentar focar melhor na proposta.', prescricao: 'Foque em entender bem o tema e não desviar dele. Pratique elaborar um ponto de vista claro e consistente.' },
+                    80: { comentario: 'O texto copia trechos dos textos motivadores ou não segue a estrutura correta de proposição, argumentação e conclusão. Precisamos trabalhar nisso!', prescricao: 'Evite copiar trechos dos textos motivadores. Desenvolva suas próprias ideias e siga a estrutura de proposição, argumentação e conclusão.' },
+                    120: { comentario: 'O texto desenvolve o tema de forma previsível e segue a estrutura, mas ainda falta um pouco de profundidade na argumentação. Continue praticando!', prescricao: 'Aprimore sua argumentação e tente trazer mais profundidade às suas ideias. Leia exemplos de boas redações para entender como estruturar melhor seus argumentos.' },
+                    160: { comentario: 'O texto desenvolve bem o tema com uma argumentação consistente e segue a estrutura correta. Ótimo trabalho, mantenha-se focado!', prescricao: 'Continue praticando a escrita de redações, focando em manter a consistência da argumentação e a estrutura correta.' },
+                    200: { comentario: 'O texto apresenta uma argumentação sólida e usa referências culturais de forma produtiva. Excelente domínio da estrutura! Parabéns!', prescricao: 'Mantenha a prática e busque sempre enriquecer seu texto com referências culturais relevantes. Continue revisando e aprimorando seus textos.' }
+                },
+                C3: {
+                    0: { comentario: 'O texto apresenta informações que não têm nada a ver com o tema e não defende nenhum ponto de vista. Precisamos focar mais.', prescricao: 'Defina claramente o ponto de vista que você vai defender e reúna ideias pertinentes ao tema. Evite informações que não se relacionam diretamente com o tema.' },
+                    40: { comentario: 'O texto tem informações pouco relacionadas ao tema ou incoerentes, e não defende um ponto de vista claro. Vamos organizar melhor as ideias.', prescricao: 'Organize suas ideias e certifique-se de que elas são pertinentes ao tema e defendem um ponto de vista. Pratique organizar suas informações de forma coerente.' },
+                    80: { comentario: 'O texto apresenta informações relacionadas ao tema, mas está desorganizado ou contraditório, e só usa os argumentos dos textos motivadores. Vamos trabalhar nisso!', prescricao: 'Selecione as informações e opiniões mais relevantes e organize-as de forma lógica. Evite usar apenas os argumentos dos textos motivadores e desenvolva suas próprias ideias.' },
+                    120: { comentario: 'O texto apresenta informações relacionadas ao tema, mas está limitado aos argumentos dos textos motivadores e pouco organizado. Precisamos melhorar a estrutura.', prescricao: 'Melhore a organização das suas ideias e traga argumentos próprios, além dos textos motivadores. Certifique-se de que cada informação contribui para a defesa do seu ponto de vista.' },
+                    160: { comentario: 'O texto apresenta informações relacionadas ao tema, de forma organizada e com sinais de autoria, defendendo um ponto de vista. Muito bom, continue assim!', prescricao: 'Continue organizando bem suas ideias e desenvolvendo argumentos próprios. Mantenha a coerência e a clareza na defesa do seu ponto de vista.' },
+                    200: { comentario: 'O texto apresenta informações e opiniões bem relacionadas ao tema, de forma consistente e organizada, mostrando autoria e defendendo um ponto de vista. Excelente trabalho!', prescricao: 'Mantenha a consistência e a organização das suas informações. Continue desenvolvendo um repertório próprio e defenda seu ponto de vista de forma clara e articulada.' }
+                },
+                C4: {
+                    0: { comentario: 'O texto não conecta bem as informações. Precisamos trabalhar na coesão das ideias.', prescricao: 'Pratique a estruturação dos parágrafos e períodos. Use pronomes, conjunções e advérbios para conectar as ideias.' },
+                    40: { comentario: 'O texto conecta as partes de forma fraca. Vamos melhorar a ligação entre as ideias.', prescricao: 'Melhore a ligação entre as partes do texto usando conectivos apropriados. Pratique a organização de ideias em parágrafos bem estruturados.' },
+                    80: { comentario: 'O texto conecta as partes de forma insuficiente, com muitas falhas, e usa poucos conectivos. Precisamos diversificar os recursos coesivos.', prescricao: 'Diversifique o uso de recursos coesivos como pronomes, sinônimos e conjunções. Revise e melhore a conexão entre as ideias.' },
+                    120: { comentario: 'O texto conecta as partes de forma mediana, mas ainda com algumas falhas, e usa poucos conectivos. Continue praticando para melhorar.', prescricao: 'Pratique a coesão textual com foco em eliminar as inadequações. Use uma variedade maior de conectivos e revise seus textos.' },
+                    160: { comentario: 'O texto conecta bem as partes, com poucas falhas, e usa uma boa variedade de conectivos. Ótimo trabalho!', prescricao: 'Continue usando conectivos variados e revise seus textos para garantir que as ligações entre as ideias estão claras.' },
+                    200: { comentario: 'O texto conecta muito bem todas as partes e usa uma variedade rica de conectivos. Excelente, continue assim!', prescricao: 'Mantenha a boa prática de usar conectivos variados e revise regularmente para garantir que todas as partes do texto estão bem conectadas.' }
+                },
+                C5: {
+                    0: { comentario: 'O texto não apresenta nenhuma proposta de solução ou a proposta não tem relação com o tema. Precisamos criar uma proposta relevante.', prescricao: 'Pense em uma proposta concreta e específica para resolver o problema relacionado ao tema. Certifique-se de que está diretamente relacionada ao tema.' },
+                    40: { comentario: 'O texto apresenta uma proposta de solução muito vaga ou fraca, ou apenas relacionada ao assunto. Vamos detalhar mais.', prescricao: 'Detalhe mais a sua proposta de solução, incluindo quem deve executá-la, como será feita e qual será o efeito esperado.' },
+                    80: { comentario: 'O texto apresenta uma proposta de solução, mas ela é insuficiente ou não está conectada ao que foi discutido. Vamos melhorar a conexão.', prescricao: 'Melhore a conexão entre a proposta de solução e a discussão desenvolvida no texto. Certifique-se de que a proposta responde diretamente ao problema abordado.' },
+                    120: { comentario: 'O texto apresenta uma proposta de solução mediana, conectada ao tema e ao que foi discutido. Continue praticando para detalhar mais.', prescricao: 'Continue detalhando sua proposta e garantindo que ela esteja bem conectada ao tema e ao que foi discutido no texto.' },
+                    160: { comentario: 'O texto apresenta uma boa proposta de solução, conectada ao tema e ao que foi discutido. Ótimo trabalho!', prescricao: 'Mantenha a prática de detalhar bem a proposta e garantir que ela esteja conectada ao tema e à discussão desenvolvida.' },
+                    200: { comentario: 'O texto apresenta uma proposta de solução muito bem detalhada e conectada ao tema e ao que foi discutido. Excelente, continue assim!', prescricao: 'Continue elaborando propostas bem detalhadas e conectadas ao tema. Revise regularmente para garantir que todos os elementos da proposta estão claros e bem articulados.' }
+                },
+                Anulação: {
+                    'Fuga ao tema': { comentario: 'O seu texto foi anulado porque não abordou o tema proposto de maneira alguma, desenvolvendo um assunto completamente diferente.', prescricao: 'Leia atentamente a proposta de redação e os textos motivadores para compreender o tema. Faça um esboço dos pontos principais que você deseja abordar e garanta que todos estejam diretamente relacionados ao tema.' },
+                    'Outro gênero': { comentario: 'O seu texto foi anulado porque não seguiu a estrutura de um texto dissertativo-argumentativo, apresentando características predominantes de outros tipos textuais, como narrativo ou descritivo.', prescricao: 'Estude a estrutura do texto dissertativo-argumentativo: introdução, desenvolvimento e conclusão. Pratique redigir textos que defendam um ponto de vista com argumentos claros e coesos.' },
+                    'Extensão insuficiente': { comentario: 'O seu texto foi anulado porque teve uma extensão muito curta, com até 7 linhas manuscritas ou até 10 linhas em braille, independentemente do conteúdo.', prescricao: 'Planeje seu texto para que tenha pelo menos 20 linhas. Desenvolva cada ponto com exemplos e detalhes, garantindo que a introdução, desenvolvimento e conclusão estejam bem delineados.' },
+                    'Cópia de coletânea': { comentario: 'O seu texto foi anulado porque continha cópias dos textos motivadores ou do caderno de questões sem pelo menos 8 linhas de produção original.', prescricao: 'Use os textos motivadores apenas como referência. Escreva suas próprias palavras e desenvolva seus próprios argumentos e ideias sobre o tema.' },
+                    'Desenhos ou anulação proposital': { comentario: 'O seu texto foi anulado porque continha desenhos ou qualquer forma proposital de anulação em qualquer parte da folha de redação.', prescricao: 'Concentre-se em escrever apenas o texto. Evite adicionar qualquer tipo de marcação ou desenho na folha de redação.' },
+                    'Sinais gráficos sem função': { comentario: 'O seu texto foi anulado porque apresentou números ou sinais gráficos sem uma função clara em qualquer parte do texto ou da folha de redação.', prescricao: 'Utilize apenas texto em sua redação. Evite adicionar números ou sinais gráficos que não façam parte dos argumentos ou explicações do seu texto.' },
+                    'Parte desconectada': { comentario: 'O seu texto foi anulado porque continha trechos deliberadamente desconectados do tema proposto, como reflexões sobre o próprio processo de escrita, bilhetes à banca avaliadora, mensagens políticas ou religiosas desarticuladas da argumentação.', prescricao: 'Mantenha seu foco no tema proposto. Cada parágrafo deve contribuir para a argumentação e desenvolvimento do seu ponto de vista sobre o tema. Evite digressões e mantenha a relevância.' },
+                    'Termos ofensivos': { comentario: 'O seu texto foi anulado porque continha impropérios ou termos ofensivos, mesmo que fizessem parte do projeto de texto.', prescricao: 'Utilize uma linguagem formal e respeitosa. Evite qualquer tipo de linguagem que possa ser considerada ofensiva ou inadequada.' },
+                    'Identificação inadequada': { comentario: 'O seu texto foi anulado porque havia identificação de alguma forma fora do local destinado para a assinatura.', prescricao: 'Não escreva seu nome ou qualquer forma de identificação fora do local específico para a assinatura.' },
+                    'Língua estrangeira': { comentario: 'O seu texto foi anulado porque foi escrito predominantemente ou integralmente em língua estrangeira.', prescricao: 'Escreva sua redação integralmente em português, conforme exigido pelas normas do ENEM.' },
+                    'Folha em branco': { comentario: 'O seu texto foi anulado porque a folha de redação estava em branco, mesmo que houvesse texto escrito nas folhas de rascunho.', prescricao: 'Certifique-se de transferir seu texto do rascunho para a folha de redação oficial. Reserve tempo suficiente para esta etapa.' },
+                    'Texto ilegível': { comentario: 'O seu texto foi anulado porque estava ilegível a ponto de impossibilitar a leitura por dois avaliadores independentes.', prescricao: 'Escreva de forma legível e clara. Pratique sua caligrafia e revise seu texto para garantir que está legível antes de entregar.' }
+                }
+            };
+
+            if (anulacao) {
+                document.getElementById('notaTotal').innerText = '0';
+                document.getElementById('c1Nota').innerText = '-';
+                document.getElementById('c1Comentario').innerText = '-';
+                document.getElementById('c1Sugestao').innerText = '-';
+                document.getElementById('c2Nota').innerText = '-';
+                document.getElementById('c2Comentario').innerText = '-';
+                document.getElementById('c2Sugestao').innerText = '-';
+                document.getElementById('c3Nota').innerText = '-';
+                document.getElementById('c3Comentario').innerText = '-';
+                document.getElementById('c3Sugestao').innerText = '-';
+                document.getElementById('c4Nota').innerText = '-';
+                document.getElementById('c4Comentario').innerText = '-';
+                document.getElementById('c4Sugestao').innerText = '-';
+                document.getElementById('c5Nota').innerText = '-';
+                document.getElementById('c5Comentario').innerText = '-';
+                document.getElementById('c5Sugestao').innerText = '-';
+                document.getElementById('anulacaoTable').style.display = 'table';
+                document.getElementById('anulacaoMotivo').innerText = anulacao;
+                document.getElementById('anulacaoComentario').innerText = matriz['Anulação'][anulacao].comentario;
+                document.getElementById('anulacaoSugestao').innerText = matriz['Anulação'][anulacao].prescricao;
+            } else {
+                document.getElementById('c1Nota').innerText = competencia1;
+                document.getElementById('c1Comentario').innerText = matriz['C1'][competencia1].comentario;
+                document.getElementById('c1Sugestao').innerText = matriz['C1'][competencia1].prescricao;
+                document.getElementById('c2Nota').innerText = competencia2;
+                document.getElementById('c2Comentario').innerText = matriz['C2'][competencia2].comentario;
+                document.getElementById('c2Sugestao').innerText = matriz['C2'][competencia2].prescricao;
+                document.getElementById('c3Nota').innerText = competencia3;
+                document.getElementById('c3Comentario').innerText = matriz['C3'][competencia3].comentario;
+                document.getElementById('c3Sugestao').innerText = matriz['C3'][competencia3].prescricao;
+                document.getElementById('c4Nota').innerText = competencia4;
+                document.getElementById('c4Comentario').innerText = matriz['C4'][competencia4].comentario;
+                document.getElementById('c4Sugestao').innerText = matriz['C4'][competencia4].prescricao;
+                document.getElementById('c5Nota').innerText = competencia5;
+                document.getElementById('c5Comentario').innerText = matriz['C5'][competencia5].comentario;
+                document.getElementById('c5Sugestao').innerText = matriz['C5'][competencia5].prescricao;
+            }
+
+            const ctx = document.getElementById('radarChart').getContext('2d');
+            if (anulacao || (competencia1 === 0 && competencia2 === 0 && competencia3 === 0 && competencia4 === 0 && competencia5 === 0)) {
+                document.getElementById('radarChart').style.display = 'none';
+            } else {
+                new Chart(ctx, {
+                    type: 'radar',
+                    data: {
+                        labels: ['Competência 1', 'Competência 2', 'Competência 3', 'Competência 4', 'Competência 5'],
+                        datasets: [{
+                            label: 'Notas',
+                            data: [competencia1, competencia2, competencia3, competencia4, competencia5],
+                            backgroundColor: 'rgba(128, 0, 128, 0.2)',
+                            borderColor: '#808080',
+                            borderWidth: 1,
+                            pointBackgroundColor: '#808080',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: '#808080'
+                        }]
+                    },
+                    options: {
+                        scale: {
+                            ticks: {
+                                beginAtZero: true,
+                                max: 200,
+                                stepSize: 40
+                            }
+                        }
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>
